@@ -5,7 +5,6 @@ set(CMAKE_CXX_STANDARD 14)
 
 #add_executable(leetcode_cpp main.cpp)
 # 遍历项目根目录下所有的 .cpp 文件
-# 遍历项目根目录下所有的 .cpp 文件
 file (GLOB_RECURSE files *.cpp)
 foreach (file ${files})
     string(REGEX REPLACE ".+/(.+)\\..*" "\\1" exe ${file})
