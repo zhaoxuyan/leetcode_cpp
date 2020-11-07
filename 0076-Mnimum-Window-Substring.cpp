@@ -76,8 +76,8 @@ public:
                     window[d]--;
                 }
             }
-            return len == INT16_MAX ? "" : s.substr(start, len);
         }
+        return len == INT16_MAX ? "" : s.substr(start, len);
     }
 
 private:
