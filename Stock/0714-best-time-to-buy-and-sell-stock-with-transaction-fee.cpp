@@ -29,6 +29,7 @@ public:
         for (int i = 0; i < n; ++i) {
             if (i == 0) {
                 dp[i][0] = 0;
+                // 需要重新推导
                 dp[i][1] = -prices[i] - fee;
                 continue;
             }
