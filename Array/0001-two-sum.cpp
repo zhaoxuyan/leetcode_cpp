@@ -15,7 +15,8 @@
 
 using namespace std;
 
-
+// 因为是返回下标 所以不能排序用双指针
+// 且数组中只包含一个答案。“每种输入只会对应一个答案”
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {

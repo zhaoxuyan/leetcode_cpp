@@ -22,6 +22,8 @@ public:
             slow = slow->next;
             if (fast == slow) {
                 // 数学推导 画图 见labuladong
+                // 当慢的追上快的时候，令任意一个等于头，然后再以相同速度前进。
+                // 当再次相遇时，则为链表环的起点
                 slow = head;
                 while (slow != fast) {
                     slow = slow->next;

@@ -46,8 +46,10 @@ public:
 
             // 判断收缩条件
             // 子串 不是 子序列
+            // 所有大小必须等于p
             while (right - left >= p.size()) {
                 if (valid == need.size()) {
+                    // 更新结果
                     res.push_back(left);
                 }
                 char d = s[left];
