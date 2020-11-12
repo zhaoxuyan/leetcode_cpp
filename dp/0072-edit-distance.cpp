@@ -38,6 +38,7 @@ using namespace std;
 
 class Solution {
 public:
+    // dp[i][j]含义：word1在0到i(前i个字符) 变换到 word2在0到j(前j个字符) 需要最少的编辑距离
     int minDistance(string word1, string word2) {
         int m = word1.size();
         int n = word2.size();
