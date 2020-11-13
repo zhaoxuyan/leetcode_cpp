@@ -16,6 +16,7 @@ class Solution {
 public:
     int maxSubArray(vector<int>& nums) {
         int sum = 0;
+        // 注意res的初值
         int res = nums[0];
         for (auto& num : nums) {
             if (sum > 0) {

@@ -33,6 +33,7 @@ class Solution {
 public:
     // dp[i]表示以nums[i]结尾的最长递增子序列的长度
     int lengthOfLIS(vector<int>& nums) {
+        // 特殊情况
         if (nums.empty()) return 0;
         int dp[nums.size()];
         // 注意 memset只能初始化0或-1
