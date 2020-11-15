@@ -27,6 +27,7 @@ public:
         for (auto& num : nums) {
             sum += num;
         }
+        // 如果是奇数 肯定不能平分 返回false
         if (sum % 2 != 0) return false;
         sum = sum / 2;
         int n = nums.size();

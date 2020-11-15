@@ -1,4 +1,5 @@
 /**
+ * 46. 全排列
  * Given a collection of distinct integers, return all possible permutations.
  * 给定一个 没有重复 数字的序列，返回其所有可能的全排列。
  *
@@ -52,9 +53,8 @@ public:
             return;
         }
         for (int i = 0; i < nums.size(); ++i) {
-            // 排除不合法的选择
-            auto it = find(track.begin(), track.end(), nums[i]);
-            if (it != track.end()) continue;
+            // 排除不合法的选择 这里其实就是检查used
+            if (find(track.begin(), track.end(), nums[i]) != track.end()) continue;
             // 做选择
             track.push_back(nums[i]);
             // 进入下一层决策树
