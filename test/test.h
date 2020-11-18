@@ -5,7 +5,7 @@
 #ifndef LEETCODE_CPP_TEST_H
 #define LEETCODE_CPP_TEST_H
 #include <iostream>
-
+#include "test2.h"
 using namespace std;
 
 //int a = 3;

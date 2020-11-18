@@ -55,8 +55,9 @@ public:
             res.push_back(path);
             return;
         }
+        // 注意i从begin开始
         for (int i = begin; i < len; ++i) {
-            // 每一次搜索的时候设置 下一轮搜索的起点 begin，请看下图。
+            // 每一次搜索的时候设置 下一轮搜索的起点 begin
             path.push_back(candidates[i]);
             // 注意：由于每一个元素可以重复使用，下一轮搜索的起点依然是 i，这里非常容易弄错
             dfs(candidates, path, i, res, len, target - candidates[i]);
