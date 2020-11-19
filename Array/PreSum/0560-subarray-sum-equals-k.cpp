@@ -17,7 +17,7 @@ using namespace std;
 
 class Solution {
 public:
-    /* 超时
+    /* 正宗前缀和：超时
      * nums
      * index   0 1 2  3  4  5
      * value   3 5 2 -2  4  1
@@ -47,6 +47,7 @@ public:
     }
     */
 
+    // 前缀和 + 哈希表优化
     int subarraySum(vector<int>& nums, int k) {
         // key: 前0到i的和(前缀和)
         // value: 该和出现的次数
@@ -56,8 +57,8 @@ public:
         for (auto& x : nums) {
             sum += x;
             if (mp.find(sum - k) != mp.end()) {
-                // 找sum[i] - k = sum[j]
-                // j < i
+                // 查找sum[i] - k = sum[j]
+                // 且j < i
                 count += mp[sum - k];
             }
             mp[sum]++;
