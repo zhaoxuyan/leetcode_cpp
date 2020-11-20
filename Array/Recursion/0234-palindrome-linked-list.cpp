@@ -21,6 +21,7 @@ struct ListNode {
     ListNode *next;
     ListNode(int x) : val(x), next(NULL) {}
 };
+/*
 void myGenerateList(ListNode *list, vector<int> &vec) {
     for (const auto &v : vec) {
         ListNode *node = new ListNode(v);
@@ -36,39 +37,32 @@ ListNode *myGenerateListWithoutExtraHead(vector<int> &vec) {
     pHead = nullptr;
     return pRet;
 }
+ */
 class Solution {
 public:
-    void isPalindrome(ListNode *head) {
-//
-//        ListNode* right = head;
-        ListNode* left = head;
-        ListNode* right = reverseList(head);
-//        bool isPali = true;
+    bool isPalindrome(ListNode *head) {
+        vector<int> org;
+        // 注意!!!
+        // 不能直接操作head
+        auto *left = head;
+        while (left != nullptr) {
+            org.push_back(left->val);
+            left = left->next;
+        }
 
-        right = right->next;
-        cout<<"right: "<<right->val;
+        ListNode *right = reverseList(head);
 
-
-//
-        left = left->next;
-        cout<<"left: "<<left->val;
-
-
-
-//        while (head) {
-//            if (head->val == reverse->val) {
-//                cout<<"head->val: "<<head->val<<endl;
-//                cout<<"reverse->val: "<<reverse->val<<endl;
-//                head = head->next;
-//                reverse = reverse->next;
-//            } else{
-//                cout<<"here"<<endl;
-//                return false;
-//            }
-//
-//        }
-//        return true;
+        for (int i = 0; i < org.size(); ++i) {
+            if (org[i] == right->val) {
+                right = right->next;
+            } else {
+                return false;
+            }
+        }
+        return true;
     }
+    // 这样做会改变原始链表的结构 破坏head
+    // 所以要先用一个vector把原先的head链表保存下来
     ListNode *reverseList(ListNode *head) {
         ListNode *cur = nullptr;
         ListNode *pre = head;
@@ -82,10 +76,11 @@ public:
         return cur;
     }
 };
-
+/*
 int main() {
     Solution solution;
     vector<int> node{1, 1, 2, 1};
     auto *head = myGenerateListWithoutExtraHead(node);
     solution.isPalindrome(head);
 }
+*/
