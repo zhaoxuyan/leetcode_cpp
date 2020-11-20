@@ -40,6 +40,7 @@ public:
         }
         ListNode* last = reverseN(head->next, n - 1);
         head->next->next = head;
+        // 此处加了一个successor
         head->next = successor;
         return last;
     }

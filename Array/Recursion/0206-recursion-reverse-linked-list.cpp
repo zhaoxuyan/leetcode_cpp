@@ -17,12 +17,12 @@ struct ListNode {
     ListNode(int x) : val(x), next(NULL) {}
 };
 
-/*
- * 递归函数定义：输入一个节点head
- * 将[以head为起点]的链表反转，并返回反转后的头结点(last)
- */
 class Solution {
 public:
+    /*
+     * 递归函数定义：输入一个节点head
+     * 将[以head为起点]的链表反转，并返回反转后的头结点(last)
+     */
     ListNode* reverseList(ListNode* head) {
         // base case
         if (head == nullptr || head->next == nullptr) return head;

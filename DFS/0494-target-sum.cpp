@@ -46,14 +46,6 @@ class Solution {
 public:
     //回溯法超时
     int findTargetSumWays(vector<int>& nums, int S) {
-        //        int sum = 0;
-        //        for (auto& num : nums) {
-        //            sum += abs(num);
-        //        }
-        //        if (sum < S) {
-        //            return 0;
-        //        }
-
         if (nums.empty()) return 0;
         int res = 0;
         backtrack(nums, 0, S, res);

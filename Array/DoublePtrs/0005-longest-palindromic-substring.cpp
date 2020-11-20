@@ -21,7 +21,7 @@ public:
     string longestPalindrome(string s) {
         int n = s.size();
         if (n < 2) return s;
-        // 初始化结果 ab 结果为a 呵呵了 这tm是回文？
+        // 给定字符串"a" 结果为a 呵呵了 这tm是回文？
         // 好嘛
         string res = s.substr(0, 1);
         for (int i = 0; i < n; ++i) {
