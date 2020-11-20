@@ -16,6 +16,11 @@
       9  20
         /  \
        15   7
+
+ */
+/*
+ * 解析：
+ * https://mp.weixin.qq.com/s/OlpaDhPDTJlQ5MJ8tsARlA
  */
 
 #include <algorithm>
@@ -34,21 +39,30 @@ struct TreeNode {
 class Solution {
 public:
     TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
-
+        return build(preorder, 0, preorder.size() - 1,
+                     inorder, 0, inorder.size() - 1);
     }
-    TreeNode* build(vector<int>& preorder, int pre_start, int pre_end,
-                    vector<int>& inorder, int in_start, int in_end){
+    TreeNode* build(vector<int>& preorder, int pre_start, int pre_end, vector<int>& inorder, int in_start, int in_end) {
+        if(pre_start > pre_end){
+            return nullptr;
+        }
         // 前序的第一个元素是根节点
         int root_val = preorder[pre_start];
-        // 中序的索引
+        // 寻找中序根节点的索引
         int index = 0;
-        for (int i = in_start; i <= in_end ; ++i) {
-            if(inorder[i] == root_val){
+        for (int i = in_start; i <= in_end; ++i) {
+            if (inorder[i] == root_val) {
                 index = i;
                 break;
             }
         }
         TreeNode* root = new TreeNode(root_val);
-        root->left = build(preorder,pre_start+1,)
+        // 通过中序推导出来left_size
+        int left_size = index - in_start;
+        root->left = build(preorder, pre_start + 1, pre_start + left_size,
+                           inorder, in_start, index - 1);
+        root->right = build(preorder, pre_start + left_size + 1, pre_end,
+                            inorder, index + 1, in_end);
+        return root;
     }
 };
