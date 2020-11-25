@@ -49,7 +49,7 @@ public:
             return;
         }
         traverse(root->left, k);
-        // 二叉搜索书的中序遍历是升序
+        // 二叉搜索树性质：中序遍历是升序
         rank++;
         if (k == rank) {
             res = root->val;
