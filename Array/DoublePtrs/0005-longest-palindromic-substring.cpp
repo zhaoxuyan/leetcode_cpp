@@ -8,6 +8,8 @@
  *
  * 输入: "cbbd"
  * 输出: "bb"
+ *
+ * 寻找最长回文串的核心思想：从中间向两端拓展
  */
 #include <algorithm>
 #include <cstring>
