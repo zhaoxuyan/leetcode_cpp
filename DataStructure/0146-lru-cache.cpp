@@ -3,6 +3,9 @@
  * 接收一个 capacity 参数作为缓存的最大容量，然后实现两个 API，
  * 一个是 put(key, val) 方法存入键值对，
  * 另一个是 get(key) 方法获取 key 对应的 val，如果 key 不存在则返回 -1。
+ *
+ *
+ * 分析：LinkedHashMap + 链表的splice用法
  */
 #include <algorithm>
 #include <iostream>
@@ -10,6 +13,7 @@
 #include <unordered_map>
 #include <vector>
 using namespace std;
+
 class LRUCache {
 public:
     //删除、查找、插入的复杂度都O（1）
