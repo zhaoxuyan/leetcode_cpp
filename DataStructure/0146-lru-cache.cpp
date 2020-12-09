@@ -33,7 +33,7 @@ public:
     void put(int key, int value) {
         // 若key不存在
         if (hashtable.count(key) == 0) {
-            // 如果容量到了, 删除尾部元素, 再加上新节点
+            // 如果容量满了, 删除尾部元素, 再加上新节点
             if (cache.size() == cap) {
                 hashtable.erase(cache.back().first);
                 cache.pop_back();
@@ -51,7 +51,7 @@ public:
     }
     unordered_map<int, list<pair<int, int>>::iterator> hashtable;
     list<pair<int, int>> cache;  // key value
-    int cap = 0;
+    int cap = 0;                 // cache的容量
 };
 
 /**
