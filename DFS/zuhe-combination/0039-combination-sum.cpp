@@ -18,7 +18,7 @@
  * 需要记录哪些数字已经使用过，此时用 used 数组；
  *
  * 组合问题，不讲究顺序（即 [2, 2, 3] 与 [2, 3, 2] 视为相同列表时），
- * 需要按照某种顺序搜索，此时使用 begin 变量。
+ * 需要按照某种顺序搜索，此时使用 start 变量。
 
  */
 
@@ -29,39 +29,40 @@
 using namespace std;
 
 class Solution {
+private:
+    vector<vector<int>> res;
+
 public:
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
         int len = candidates.size();
-        vector<vector<int>> res;
         if (len == 0) return res;
 
         // 路径
-        vector<int> path;
-        dfs(candidates, path, 0, res, len, target);
+        vector<int> track;
+        dfs(candidates, track, 0, target);
         return res;
     }
     /**
      *
      * @param candidates 候选数组
-     * @param path 路径
-     * @param begin 搜索起点
+     * @param track 路径
+     * @param start 搜索起点
      * @param res 结果
-     * @param len 候选数组长度
      * @param target 每减去一个元素 目标值变小
      */
-    void dfs(vector<int>& candidates, vector<int>& path, int begin, vector<vector<int>>& res, int& len, int target) {
+    void dfs(vector<int>& candidates, vector<int>& track, int start, int target) {
         if (target < 0) return;
         if (target == 0) {
-            res.push_back(path);
+            res.push_back(track);
             return;
         }
         // 注意i从begin开始
-        for (int i = begin; i < len; ++i) {
+        for (int i = start; i < candidates.size(); ++i) {
             // 每一次搜索的时候设置 下一轮搜索的起点 begin
-            path.push_back(candidates[i]);
+            track.push_back(candidates[i]);
             // 注意：由于每一个元素可以重复使用，下一轮搜索的起点依然是 i，这里非常容易弄错
-            dfs(candidates, path, i, res, len, target - candidates[i]);
-            path.pop_back();
+            dfs(candidates, track, i, target - candidates[i]);
+            track.pop_back();
         }
     }
 };

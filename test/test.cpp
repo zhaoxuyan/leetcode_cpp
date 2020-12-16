@@ -3,7 +3,7 @@
 
 
 int main(){
-    cout<<a;
+//    cout<<a;
 }
 
 

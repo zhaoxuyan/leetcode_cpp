@@ -35,6 +35,8 @@ def backtrack(路径, 选择列表):
 using namespace std;
 
 class Solution {
+private:
+    vector<vector<int>> res;
 public:
     vector<vector<int>> permute(vector<int>& nums) {
         // 路径
@@ -52,6 +54,7 @@ public:
             res.push_back(track);
             return;
         }
+        // 因为是组合 所以每次都从0开始
         for (int i = 0; i < nums.size(); ++i) {
             // 排除不合法的选择 这里其实就是检查used
             if (find(track.begin(), track.end(), nums[i]) != track.end()) continue;
@@ -63,7 +66,4 @@ public:
             track.pop_back();
         }
     }
-
-private:
-    vector<vector<int>> res;
 };
