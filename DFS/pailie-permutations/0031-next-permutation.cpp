@@ -17,15 +17,16 @@
  * 输出：[1]
  *
  *
- * 分析：题目的意思是找到字典序中大于该排序的下一个排序，
- * 也就是找到大于该排序的最小值，首先找出比末尾要小的数，
- * 如果找不到说明排序是降序，反转成升序，再找到比index位置大的数，
- * 交换之后再对交换后面的数据进行从小到大排序即可，代码如下：
+ * 1. 先找出最大的索引 k 满足 nums[k] < nums[k+1]，如果不存在，就翻转整个数组；
+ * 2. 再找出另一个最大索引 l 满足 nums[l] > nums[k]；
+ * 3. 交换 nums[l] 和 nums[k]
+ * 4. 最后翻转 nums[k+1:]
  *
-    作者：heroding
-    链接：https://leetcode-cn.com/problems/next-permutation/solution/si-lu-zui-qing-xi-de-ti-jie-by-heroding/
-    来源：力扣（LeetCode）
-    著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+ * 1. Find the largest index k such that a[k] < a[k + 1]. If no such index exists, the permutation is the last
+ * permutation.
+ * 2. Find the largest index l greater than k such that a[k] < a[l].
+ * 3. Swap the value of a[k] with that of a[l].
+ * 4. Reverse the sequence from a[k + 1] up to and including the final element a[n].
  */
 #include <algorithm>
 #include <iostream>
@@ -36,23 +37,32 @@ using namespace std;
 class Solution {
 public:
     void nextPermutation(vector<int>& nums) {
-        int index = nums.size() - 1;
-        // 找出比末尾要小的数
-        while (index > 0 && nums[index] <= nums[index - 1]) {
-            index--;
+        int k = 0;
+        bool flag = false;
+        for (int i = 0; i < nums.size() - 1; ++i) {
+            if (nums[i] < nums[i + 1]) {
+                k = i;
+                flag = true;
+            }
         }
-        if (index == 0) {
-            // 反转nums
+
+        if (!flag) {
             reverse(nums.begin(), nums.end());
         } else {
-            int i = nums.size() - 1;
-            // 找到比index位置大的数
-            while (i > index && nums[i] <= nums[index - 1]) {
-                i--;
+            int l = k;
+            for (int i = k + 1; i < nums.size(); ++i) {
+                if (nums[i] > nums[k]) {
+                    l = i;
+                }
             }
-            swap(nums[index - 1], nums[i]);
-            // 给index后的数据排序（从小到大）
-            sort(nums.begin() + index, nums.end());
+            swap(nums[k], nums[l]);
+            reverse(nums.begin() + k + 1, nums.end());
         }
     }
 };
+
+int main() {
+    Solution solution;
+    vector<int> nums = {1, 3, 2};
+    solution.nextPermutation(nums);
+}
