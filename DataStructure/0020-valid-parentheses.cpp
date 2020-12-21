@@ -1,5 +1,7 @@
 /*
  * 20. 有效括号
+ *
+ * 用栈来解决
  */
 #include <algorithm>
 #include <iostream>
