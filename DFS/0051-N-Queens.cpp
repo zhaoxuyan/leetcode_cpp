@@ -5,6 +5,8 @@
 using namespace std;
 
 class Solution {
+private:
+    vector<vector<string>> res;
 public:
     vector<vector<string>> solveNQueens(int n) {
         // '.'表示空 'Q'表示皇后 初始化空棋盘
@@ -20,6 +22,7 @@ public:
      * @param row
      */
     void dfs(vector<string>& board, int row) {
+        // 结束条件
         if (row == board.size()) {
             res.push_back(board);
             return;
@@ -41,7 +44,7 @@ public:
     static bool isValid(vector<string>& board, int row, int col) {
         int n = board.size();
         // 检查列是否有皇后互相冲突
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < row; i++) {
             if (board[i][col] == 'Q') return false;
         }
         // 检查右上方是否有皇后互相冲突
@@ -54,7 +57,4 @@ public:
         }
         return true;
     }
-
-private:
-    vector<vector<string>> res;
 };

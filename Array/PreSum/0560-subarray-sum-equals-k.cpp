@@ -26,7 +26,9 @@ public:
      * index 0 1 2 3  4  5  6
      * value 0 3 8 10 8  12 13
      *
-    int subarraySum(vector<int>& nums, int k) {
+     *
+     */
+    int subarraySum_pure(vector<int>& nums, int k) {
         int n = nums.size();
         int sum[n + 1];
         sum[0] = 0;
@@ -36,18 +38,19 @@ public:
         }
 
         int res = 0;
-        for (int i = 1; i <=n ; ++i) {
+        // i>j
+        for (int i = 1; i <= n; ++i) {
             for (int j = 0; j < i; ++j) {
-                if(sum[i] - sum[j] == k){
+                if (sum[i] - sum[j] == k) {
                     res++;
                 }
             }
         }
         return res;
     }
-    */
 
     // 前缀和 + 哈希表优化
+    // 由于不需要记录i, j
     int subarraySum(vector<int>& nums, int k) {
         // key: 前0到i的和(前缀和)
         // value: 该和出现的次数
@@ -58,7 +61,7 @@ public:
             sum += x;
             if (mp.find(sum - k) != mp.end()) {
                 // 查找sum[i] - k = sum[j]
-                // 且j < i
+                // 且i > j
                 count += mp[sum - k];
             }
             mp[sum]++;

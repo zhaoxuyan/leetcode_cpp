@@ -76,7 +76,6 @@ public:
                         visited.insert(minusOneStr);
                     }
                 }
-
             }
             // 遍历队列的for循环外面, 在此处++
             step++;

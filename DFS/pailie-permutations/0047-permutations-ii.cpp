@@ -18,41 +18,39 @@ using namespace std;
 class Solution {
 private:
     vector<vector<int>> res;
-    unordered_map<int, int> nums_count_map;
-    unordered_map<int, int> used_map;
 
 public:
     vector<vector<int>> permuteUnique(vector<int>& nums) {
-        for (auto& num : nums) nums_count_map[num]++;
-        // 路径
         vector<int> track;
-        // 排序
         sort(nums.begin(), nums.end());
-        dfs(nums, track);
+        int len = nums.size();
+        vector<bool> used(len, false);
+        backtrack(nums, used, track);
         return res;
     }
-    /**
-     * dfs
-     * @param nums 可选路径
-     * @param track  已选路径
-     */
-    void dfs(vector<int>& nums, vector<int> track) {
+
+    void backtrack(vector<int>& nums, vector<bool>& used, vector<int>& track) {
         if (track.size() == nums.size()) {
             res.push_back(track);
             return;
         }
-        // 因为是组合 所以每次都从0开始
-        for (int i = 0; i < nums.size(); ++i) {
-            // 排除不合法的选择 这里其实就是检查used
-            if (used_map[nums[i]] > 1 || used_map[nums[i]] >= nums_count_map[nums[i]]) continue;
-            // 做选择
+        for (int i = 0; i < nums.size(); i++) {
+            if (used[i]) continue;
+            // used[i-1] == false是对同一树枝不去重 对同一层去重
+            // used[i-1] == true是对同一层不去重 对同一树枝去重
+            // https://leetcode-cn.com/problems/permutations-ii/solution/47-quan-pai-lie-iiche-di-li-jie-pai-lie-zhong-de-q/
+            if (i > 0 && nums[i] == nums[i - 1] && !used[i - 1]) continue;
+            used[i] = true;
             track.push_back(nums[i]);
-            used_map[nums[i]]++;
-            // 进入下一层决策树
-            dfs(nums, track);
-            // 取消选择
+            backtrack(nums, used, track);
             track.pop_back();
-            used_map[nums[i]]--;
+            used[i] = false;
         }
     }
 };
+
+int main() {
+    Solution solution;
+    vector<int> nums = {1, 1, 2};
+    solution.permuteUnique(nums);
+}
