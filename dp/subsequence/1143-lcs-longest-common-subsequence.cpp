@@ -24,6 +24,12 @@
  *
  * dp[i][j] 的含义是：对于 s1[1..i] 和 s2[1..j]，它们的 LCS 长度是 dp[i][j]
  *
+ *      0 1 2 3 4 5 6
+ *      / b a b c d e
+ * 0  / 0 0 0 0 0 0 0
+ * 1  a 0 0 1 1 1 1 1
+ * 2  c 0 0 1 1 2 2 2
+ * 3  b 0 0 1 1 2 2 3
  * https://leetcode-cn.com/problems/longest-common-subsequence/solution/dong-tai-gui-hua-zhi-zui-chang-gong-gong-zi-xu-lie/
  */
 #include <algorithm>
@@ -52,6 +58,7 @@ public:
                     dp[i][j] = dp[i - 1][j - 1] + 1;
                 } else {
                     // 至少有一个不在lcs中
+                    // 谁能让 lcs 最长，就听谁的
                     dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
                 }
             }
