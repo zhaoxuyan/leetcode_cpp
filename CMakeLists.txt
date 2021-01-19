@@ -2,7 +2,10 @@ cmake_minimum_required(VERSION 3.17)
 project(leetcode_cpp)
 
 set(CMAKE_CXX_STANDARD 14)
-
+include_directories(
+        ./
+        ./utils/
+)
 #add_executable(leetcode_cpp main.cpp)
 # 遍历项目根目录下所有的 .cpp 文件
 file (GLOB_RECURSE files *.cpp)
